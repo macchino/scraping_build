@@ -1,10 +1,13 @@
 FROM ubuntu:latest
+
+ENV DEBIAN_FRONTEND=noninteractive
  
 # update
 RUN apt-get -y update && apt-get install -y \
 sudo \
 wget \
-vim
+vim \
+tzdata
  
 #install anaconda3
 WORKDIR /opt
