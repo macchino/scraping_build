@@ -15,8 +15,8 @@ RUN wget https://repo.continuum.io/archive/Anaconda3-2020.11-Linux-x86_64.sh  \
 && rm -f Anaconda3-2020.11-Linux-x86_64.sh
 # set path
 ENV PATH /opt/anaconda3/bin:$PATH
-ENV CHROME_VER=2.44
-ENV FIREFOX_VER=v0.23.0
+ENV CHROME_VER=88
+ENV FIREFOX_VER=v0.28.0
 
 # Chrome and Firefox browsers
 RUN apt-get update && \
@@ -26,14 +26,14 @@ RUN apt-get update && \
 	apt-get update && apt-get install -y google-chrome-stable firefox
 # Chrome driver
 #RUN CHROME_VER=$(wget -qO- https://chromedriver.storage.googleapis.com/LATEST_RELEASE) && \
-RUN wget -q https://chromedriver.storage.googleapis.com/${CHROME_VER}/chromedriver_linux64.zip && \
+RUN wget -q https://chromedriver.storage.googleapis.com/${88.0.4324.27}/chromedriver_linux64.zip && \
 	unzip -o chromedriver_linux64.zip && \
 	rm chromedriver_linux64.zip && \
 	mv chromedriver /opt/conda/bin
 
 # Firefox driver
 #RUN FIREFOX_VER=$(wget -qO- https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep -Po '"tag_name": "\K.*?(?=")') && \
-RUN wget -qO- https://github.com/mozilla/geckodriver/releases/download/${FIREFOX_VER}/geckodriver-${FIREFOX_VER}-linux64.tar.gz | tar -xvz -C /opt/conda/bin
+RUN wget -qO- https://github.com/mozilla/geckodriver/releases/download/${LATEST_RELEASE}/geckodriver-${FIREFOX_VER}-linux64.tar.gz | tar -xvz -C /opt/conda/bin
 # update pip and conda & 色変更 & kite
 RUN pip install --upgrade pip \
     && curl -sL https://deb.nodesource.com/setup_10.x | bash - \

@@ -15,3 +15,5 @@ services:
     image: scraping-love
     # コンテナ名を記述
     container_name: scraping-jupyter-love
+    environment:
+    - TZ=Asia/Tokyo
