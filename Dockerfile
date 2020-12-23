@@ -31,6 +31,8 @@ rm -f Anaconda3-2020.11-Linux-x86_64.sh
 # set path
 #::::::::::::::::::::::::::::::::::::::
 ENV PATH /opt/anaconda3/bin:$PATH
+# ENV PATH CHROME_BIN=/usr/bin/google-chrome
+# ENV PATH CHROME_DRIVER /usr/bin/chromedriver
 
 #::::::::::::::::::::::::::::::::::::::
 #chromeブラウザのインストール 
@@ -47,7 +49,8 @@ RUN apt-get update && \
 #::::::::::::::::::::::::::::::::::::::
 RUN curl -OL https://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_linux64.zip \
 && unzip chromedriver_linux64.zip chromedriver \
-&& mv chromedriver /usr/bin/chromedriver
+&& mv chromedriver /usr/bin/chromedriver \
+&& pip install "chromedriver_binary==87.0.4280.88"
 
 #::::::::::::::::::::::::::::::::::::::
 # Seleiumのインストール
@@ -61,6 +64,7 @@ RUN pip install --upgrade pip &&\
     curl -sL https://deb.nodesource.com/setup_10.x | bash - &&\
     apt install nodejs \
     && pip install autopep8 \
+    && conda install -y -c conda-forge jupyter_contrib_nbextensions \
     && pip install jupyterlab_code_formatter \
     && jupyter labextension install @ryantam626/jupyterlab_code_formatter \
     && jupyter serverextension enable --py jupyterlab_code_formatter \
