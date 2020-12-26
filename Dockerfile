@@ -58,6 +58,18 @@ RUN curl -OL https://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriv
 RUN pip install selenium
 
 #::::::::::::::::::::::::::::::::::::::
+# Juoyter-Dashのインストール
+#::::::::::::::::::::::::::::::::::::::
+RUN pip install jupyter_dash \
+&& pip install --upgrade plotly
+
+#::::::::::::::::::::::::::::::::::::::
+# SQLite3&SQLAlchemyのインストール
+#::::::::::::::::::::::::::::::::::::::
+RUN apt-get install sqlite3 libsqlite3-dev -y \
+&& pip install SQLAlchemy
+
+#::::::::::::::::::::::::::::::::::::::
 # update pip and conda & 色変更 
 #::::::::::::::::::::::::::::::::::::::
 RUN pip install --upgrade pip &&\
