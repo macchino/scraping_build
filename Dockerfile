@@ -60,8 +60,7 @@ RUN pip install selenium
 #::::::::::::::::::::::::::::::::::::::
 # Juoyter-Dashのインストール
 #::::::::::::::::::::::::::::::::::::::
-RUN pip install jupyter_dash \
-&& pip install --upgrade plotly
+RUN conda install -c conda-forge -c plotly jupyter-dash
 
 #::::::::::::::::::::::::::::::::::::::
 # SQLite3&SQLAlchemyのインストール
@@ -70,23 +69,25 @@ RUN apt-get install sqlite3 libsqlite3-dev -y \
 && pip install SQLAlchemy
 
 #::::::::::::::::::::::::::::::::::::::
-# update pip and conda & 色変更 
+# update pip and other
 #::::::::::::::::::::::::::::::::::::::
 RUN pip install --upgrade pip &&\
     curl -sL https://deb.nodesource.com/setup_10.x | bash - &&\
     apt install nodejs \
     && pip install autopep8 \
     && conda install -y -c conda-forge jupyter_contrib_nbextensions \
-    && pip install jupyterlab_code_formatter \
-    && jupyter labextension install @ryantam626/jupyterlab_code_formatter \
-    && jupyter serverextension enable --py jupyterlab_code_formatter \
     && jupyter labextension install jupyterlab-theme-solarized-dark \
-    && jupyter labextension install @lckr/jupyterlab_variableinspector
-    
+    && pip3 install jupyter-tabnine \
+    && jupyter nbextension install --py jupyter_tabnine \
+    && jupyter nbextension enable --py jupyter_tabnine \
+    && jupyter serverextension enable --py jupyter_tabnine 
+
 WORKDIR /
 
 RUN mkdir /notebook
 
+EXPOSE 8050
+EXPOSE 8888
 #::::::::::::::::::::::::::::::::::::::
 # execute jupyterlab as a default command
 #::::::::::::::::::::::::::::::::::::::

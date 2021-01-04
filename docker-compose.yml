@@ -5,9 +5,11 @@ services:
     build: .
     ports: 
       - 8888:8888
+      - 8050:8050
+
       # ローカルでマウントするフォルダ
     volumes: 
-      - 'C:\Users\macki\iCloudDrive\scraping_works:/notebook'
+      - 'C:\Users\macki:/notebook'
       # -itの部分 
     tty: true
     stdin_open: true
