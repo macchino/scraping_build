@@ -1,0 +1,21 @@
+version: "3.5"
+
+services:
+  jupyter-lab:
+    build: .
+    ports:
+      - 8888:8888
+      - 8050:8050
+
+      # ローカルでマウントするフォルダ
+    volumes:
+      - 'C:\Users\macki:/notebook'
+      # -itの部分
+    tty: true
+    stdin_open: true
+    # イメージ名を記述
+    image: scraping-love
+    # コンテナ名を記述
+    container_name: selenium-love
+    environment:
+    - TZ=Asia/Tokyo
